@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   MCA INTELLIGENCE PLATFORM — UNIFIED DARK MISSION CONTROL
+   ============================================================ */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy text-white font-sans;
+    background-color: #050d1f;
+    background-image:
+      linear-gradient(rgba(0, 212, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.025) 1px, transparent 1px);
+    background-size: 40px 40px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  input,
+  select,
+  textarea {
+    font-family: inherit;
+    outline: none;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #050d1f;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1a2d4d;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00d4ff;
+  }
+}
+
+/* ============================================================
+   COMPONENT LAYER — Reusable Glass Cards & Layout
+   ============================================================ */
+@layer components {
+
+  /* Glass Card */
+  .glass-card {
+    @apply bg-card border border-border rounded-xl;
+    background: rgba(15, 31, 61, 0.8);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 212, 255, 0.03);
+  }
+
+  /* Neon Button */
+  .btn-neon {
+    @apply px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200;
+    background: linear-gradient(135deg, #00d4ff, #0066ff);
+    color: #050d1f;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  }
+
+  .btn-neon:hover {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5), 0 0 60px rgba(0, 212, 255, 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* Ghost Button */
+  .btn-ghost {
+    @apply px-5 py-2.5 rounded-lg font-semibold text-sm border border-border text-light transition-all duration-200;
+  }
+
+  .btn-ghost:hover {
+    @apply border-neon text-neon;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+
+  /* Danger Button */
+  .btn-danger {
+    @apply px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 text-white;
+    background: rgba(255, 68, 68, 0.15);
+    border: 1px solid rgba(255, 68, 68, 0.4);
+  }
+
+  .btn-danger:hover {
+    background: rgba(255, 68, 68, 0.25);
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
+  }
+
+  /* Sidebar */
+  .sidebar-nav {
+    @apply flex flex-col gap-1;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-muted transition-all duration-200 cursor-pointer;
+  }
+
+  .nav-item:hover {
+    @apply text-white bg-border;
+  }
+
+  .nav-item.active {
+    @apply text-neon font-semibold;
+    background: rgba(0, 212, 255, 0.08);
+    border-left: 3px solid #00d4ff;
+    box-shadow: inset 0 0 20px rgba(0, 212, 255, 0.05);
+  }
+
+  /* Risk Badges */
+  .badge-critical {
+    @apply px-2.5 py-1 rounded-full text-xs font-bold;
+    background: rgba(255, 68, 68, 0.15);
+    color: #ff4444;
+    border: 1px solid rgba(255, 68, 68, 0.3);
+  }
+
+  .badge-warning {
+    @apply px-2.5 py-1 rounded-full text-xs font-bold;
+    background: rgba(255, 184, 0, 0.15);
+    color: #ffb800;
+    border: 1px solid rgba(255, 184, 0, 0.3);
+  }
+
+  .badge-safe {
+    @apply px-2.5 py-1 rounded-full text-xs font-bold;
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    border: 1px solid rgba(0, 255, 136, 0.25);
+  }
+
+  /* Input Fields */
+  .input-dark {
+    @apply w-full bg-panel border border-border rounded-lg px-4 py-2.5 text-sm text-white placeholder-muted transition-all duration-200;
+  }
+
+  .input-dark:focus {
+    @apply border-neon;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
+  }
+
+  /* Select Fields */
+  .select-dark {
+    @apply w-full bg-panel border border-border rounded-lg px-4 py-2.5 text-sm text-white transition-all duration-200 cursor-pointer;
+  }
+
+  .select-dark:focus {
+    @apply border-neon;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
+  }
+
+  /* Table */
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table th {
+    @apply text-xs font-semibold text-muted uppercase tracking-wider px-4 py-3 text-left;
+    border-bottom: 1px solid #1a2d4d;
+  }
+
+  .data-table td {
+    @apply px-4 py-3 text-light border-b border-border;
+  }
+
+  .data-table tr:hover td {
+    @apply bg-border;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Stat Card */
+  .stat-card {
+    @apply glass-card p-5 flex flex-col gap-2;
+  }
+
+  /* Section Header */
+  .section-header {
+    @apply text-xs font-semibold text-muted uppercase tracking-widest mb-4;
+  }
+
+  /* Toast */
+  .toast-success {
+    @apply fixed top-6 right-6 z-50 px-5 py-3 rounded-xl text-sm font-semibold;
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: #00ff88;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+  }
+
+  .toast-error {
+    @apply fixed top-6 right-6 z-50 px-5 py-3 rounded-xl text-sm font-semibold;
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    color: #ff4444;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.2);
+  }
+
+  .toast-info {
+    @apply fixed top-6 right-6 z-50 px-5 py-3 rounded-xl text-sm font-semibold;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    color: #00d4ff;
+    backdrop-filter: blur(12px);
+  }
+
+  /* Modal Overlay */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-6;
+    background: rgba(5, 13, 31, 0.85);
+    backdrop-filter: blur(8px);
+  }
+
+  .modal-card {
+    @apply glass-card w-full max-w-lg p-6;
+    box-shadow: 0 0 60px rgba(0, 212, 255, 0.1), 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Page Wrapper */
+  .page-wrap {
+    @apply flex min-h-screen bg-navy;
+  }
+
+  /* Sidebar Container */
+  .sidebar-container {
+    @apply flex flex-col w-64 flex-shrink-0 border-r border-border;
+    background: rgba(10, 22, 40, 0.95);
+    backdrop-filter: blur(20px);
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+
+  /* Main Content */
+  .main-content {
+    @apply flex-1 overflow-y-auto;
+    height: 100vh;
+  }
+
+  /* Garden container - dark mode */
+  .garden-stage {
+    @apply flex flex-col items-center;
+  }
+}
+
+/* ============================================================
+   ANIMATIONS & KEYFRAMES
+   ============================================================ */
+@layer utilities {
+
+  @keyframes pulseNeon {
+
+    0%,
+    100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 8px #00d4ff);
+    }
+
+    50% {
+      opacity: 0.6;
+      filter: drop-shadow(0 0 20px #00d4ff);
+    }
+  }
+
+  @keyframes radarSweep {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes swayLeaf {
+
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+  @keyframes growStem {
+    from {
+      stroke-dashoffset: 200;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes waterDrop {
+    0% {
+      transform: translateY(-30px);
+      opacity: 0;
+    }
+
+    40% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(70px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes bloomPop {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+
+    70% {
+      transform: scale(1.2);
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes floatBadge {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes pulseCritical {
+
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+  }
+
+  .animate-radar-sweep {
+    transform-origin: 50% 50%;
+    animation: radarSweep 4s linear infinite;
+  }
+
+  .animate-sway {
+    transform-origin: bottom center;
+    animation: swayLeaf 4s ease-in-out infinite;
+  }
+
+  .animate-bloom {
+    animation: bloomPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  .animate-water-drop {
+    animation: waterDrop 1.2s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: floatBadge 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-critical {
+    animation: pulseCritical 1.5s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.4s ease-out forwards;
+  }
+
+  .animate-slide-right {
+    animation: slideInRight 0.3s ease-out forwards;
+  }
+
+  .animate-slide-left {
+    animation: slideInLeft 0.3s ease-out forwards;
+  }
+
+  /* Neon text glow */
+  .text-neon-glow {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.3);
+  }
+
+  .text-safe-glow {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+  }
+
+  .text-danger-glow {
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.6);
+  }
+
+  /* Swipe cards for faculty */
+  .swipe-card {
+    @apply absolute w-full h-full glass-card p-6 select-none cursor-grab;
+    transition: transform 0.15s ease;
+  }
+
+  .swipe-card:active {
+    cursor: grabbing;
+  }
+}
